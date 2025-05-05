@@ -277,15 +277,15 @@
             });
 
         $statusColors = [
-            'healthy' => 'green',
-            'sick' => 'red',
-            'recovering' => 'yellow',
-            'quarantined' => 'purple',
+            'Sehat' => 'green',
+            'Sakit' => 'red',
+            'Pemulihan' => 'yellow',
+            'Karantina' => 'purple',
         ];
       @endphp
 
       @if ($healthStatuses->count() > 0)
-        <div class="space-y-4">
+        <div class="space-y-8">
           @foreach ($healthStatuses as $status)
             @php
               $color = $statusColors[$status->health_status] ?? 'gray';

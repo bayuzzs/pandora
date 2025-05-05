@@ -18,8 +18,7 @@ return new class extends Migration {
       $table->date('birth_date');
       $table->string('breed');
       $table->decimal('weight', 6, 2)->comment('Berat dalam kg');
-      $table->enum('health_status', ['healthy', 'sick', 'recovering', 'quarantined'])
-        ->default('healthy');
+      $table->enum('health_status', ['Sehat', 'Sakit', 'Pemulihan', 'Karantina']);
       $table->foreignId('pen_id')->nullable()->constrained('pens')->nullOnDelete();
       $table->string('parent_sire')->nullable()->comment('RFID Pejantan');
       $table->string('parent_dam')->nullable()->comment('RFID Induk');
