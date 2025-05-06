@@ -9,8 +9,7 @@
       <h1 class="text-3xl font-bold text-white mb-4">Selamat Datang!</h1>
       {{-- <h1 class="text-3xl font-bold text-white mb-4">Selamat Datang, {{ Auth::user()->name }}!</h1> --}}
       <p class="text-white/90 text-lg">Selamat Datang di Pandora - Pendataan Domba Rahayu</p>
-      <p class="text-white/90 text-lg mt-2">Sistem pengelolaan data domba yang membantu Anda mengawasi dan mengelola ternak
-        domba dengan lebih efisien.</p>
+      <p class="text-white/90 text-lg mt-2">Sistem pengelolaan data domba yang membantu Anda mengawasi dan mengelola ternak domba dengan lebih efisien.</p>
       <div class="mt-6">
         <a href="{{ route('dashboard.sheep.create') }}"
           class="inline-flex items-center px-4 py-2 bg-white text-green-700 border border-transparent rounded-md font-semibold text-sm hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-green-700 transition-colors duration-200">
@@ -28,11 +27,11 @@
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
     @php
       $totalSheep = \App\Models\Sheep::count();
-      $healthySheep = \App\Models\Sheep::where('health_status', 'healthy')->count();
+      $healthySheep = \App\Models\Sheep::where('health_status', 'Sehat')->count();
       $totalPens = \App\Models\Pen::count();
       $sickSheep =
-          \App\Models\Sheep::where('health_status', 'sick')->count() +
-          \App\Models\Sheep::where('health_status', 'recovering')->count();
+          \App\Models\Sheep::where('health_status', 'Sakit')->count() +
+          \App\Models\Sheep::where('health_status', 'Pemulihan')->count();
     @endphp
 
     <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow duration-300">
@@ -171,7 +170,7 @@
               @foreach ($recentSheep as $sheep)
                 <tr>
                   <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {{ $sheep->rfid }}
+                    {{ $sheep->uid }}
                   </td>
                   <td class="px-6 py-4 whitespace-nowrap">
                     <div class="flex items-center">
@@ -228,7 +227,7 @@
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
     <!-- Breed Distribution -->
     <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
-      <h2 class="text-lg font-semibold text-gray-800 mb-4">Distribusi Breed Domba</h2>
+      <h2 class="text-lg font-semibold text-gray-800 mb-4">Distribusi Ras Domba</h2>
 
       @php
         $breeds = \App\Models\Sheep::select('breed')

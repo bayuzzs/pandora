@@ -32,11 +32,11 @@
             <span class="h-2 w-2 mr-1 bg-green-400 rounded-full animate-pulse"></span>
             Terhubung
           </span>
-          <span id="device-status"
+          {{-- <span id="device-status"
             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
             <span class="h-2 w-2 mr-1 bg-yellow-400 rounded-full"></span>
             Menunggu Pemindaian
-          </span>
+          </span> --}}
         </div>
       </div>
 
@@ -66,7 +66,7 @@
           </div>
 
           <form action="{{ route('dashboard.sheep.search') }}" method="GET" class="mt-4 flex">
-            <input type="text" id="manual-rfid" name="rfid" placeholder="Masukkan ID RFID"
+            <input type="text" id="uid" name="uid" placeholder="Masukkan ID RFID"
               class="flex-grow h-11 rounded-l-lg border-gray-300 bg-white shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 focus:ring-opacity-50 transition-colors duration-200">
             <button id="search-btn" type="submit"
               class="px-6 h-11 bg-green-600 text-white font-medium rounded-r-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
@@ -78,7 +78,7 @@
     </div>
 
     <!-- Recently Scanned Sheep -->
-    <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 mb-6">
+    {{-- <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100 mb-6">
       <h2 class="text-lg font-semibold text-gray-800 mb-4">Pemindaian Terbaru</h2>
       <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-gray-200">
@@ -117,7 +117,7 @@
           </tbody>
         </table>
       </div>
-    </div>
+    </div> --}}
 
     <!-- Sheep Details Card (Initially Hidden unless found) -->
     <div id="sheep-details"
@@ -127,7 +127,7 @@
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-semibold text-gray-800">Detail Domba Ditemukan</h2>
           <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-            ID: {{ $sheep->rfid }}
+            ID: {{ $sheep->uid }}
           </span>
         </div>
 
@@ -465,15 +465,15 @@
       }
 
       // Process RFID scan data
-      function handleRFIDScan(rfid) {
+      function handleRFIDScan(uid) {
         // Update UI to show scanning state
         updateConnectionStatus('scanning');
 
         // Simulate API request to fetch sheep data
-        fetchSheepData(rfid);
+        fetchSheepData(uid);
 
         // Add to recent scans list
-        addToRecentScans(rfid);
+        addToRecentScans(uid);
 
         // Reset scanner state after a delay
         setTimeout(() => {
@@ -500,7 +500,7 @@
         */
 
         // For demo purposes, redirect to search page with rfid parameter
-        window.location.href = `/dashboard/sheep/search?rfid=${rfid}`;
+        window.location.href = `/dashboard/sheep/search?rfid=${uid}`;
       }
 
       // Add a new scan to the recent scans table
@@ -541,36 +541,18 @@
         }
       }
 
-      // Simulate RFID scans (for demo purposes)
-      function listenForRFIDScans() {
-        // In a real implementation, you'd listen for WebSocket messages
-        // Here we'll simulate random scans for demo purposes
-
-        // Example RFID tags
-        const exampleRFIDs = [
-          'RF-2023-0089',
-          'RF-2023-0072',
-          'RF-2023-0045',
-          'RF-2023-0118',
-          'RF-2023-0056'
-        ];
-
-        // Schedule a random scan 
-        const randomScanTimeout = Math.random() * 20000 + 10000; // Random time between 10-30 seconds
-        setTimeout(() => {
-          if (isConnected) {
-            // Pick a random RFID
-            const rfid = exampleRFIDs[Math.floor(Math.random() * exampleRFIDs.length)];
-            handleRFIDScan(rfid);
-
-            // Schedule the next scan
-            listenForRFIDScans();
-          }
-        }, randomScanTimeout);
-      }
-
-      // Start the connection
-      connectToIoTDevice();
-    });
+   
   </script>
+  @push('scripts')
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+      setInterval(function () {
+          $.get('/check-uid', function (data) {
+              if (data.uid && $('#uid').val() === '') {
+                  $('#uid').val(data.uid);
+              }
+          });
+      }, 2000); // Cek setiap 2 detik
+  </script>
+  @endpush
 @endsection

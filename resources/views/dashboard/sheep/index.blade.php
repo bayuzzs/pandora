@@ -195,17 +195,17 @@
                   <p class="text-sm text-gray-600">{{ ucfirst($animal->breed) }}</p>
                 </div>
                 <div class="ml-auto">
-                  @if ($animal->health_status == 'healthy')
+                  @if ($animal->health_status == 'Sehat')
                     <span
                       class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                       Sehat
                     </span>
-                  @elseif($animal->health_status == 'sick')
+                  @elseif($animal->health_status == 'Sakit')
                     <span
                       class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                       Sakit
                     </span>
-                  @elseif($animal->health_status == 'recovering')
+                  @elseif($animal->health_status == 'Pemulihan')
                     <span
                       class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                       Pemulihan
@@ -222,7 +222,7 @@
                 <div class="grid grid-cols-2 gap-4 mb-4">
                   <div>
                     <p class="text-xs text-gray-500 mb-1">RFID</p>
-                    <p class="text-sm font-medium">{{ $animal->rfid }}</p>
+                    <p class="text-sm font-medium">{{ $animal->uid }}</p>
                   </div>
                   <div>
                     <p class="text-xs text-gray-500 mb-1">Berat</p>

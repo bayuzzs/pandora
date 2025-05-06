@@ -21,7 +21,7 @@ class SheepController extends Controller
       $search = $request->input('search');
       $query->where(function ($q) use ($search) {
         $q->where('name', 'like', "%{$search}%")
-          ->orWhere('rfid', 'like', "%{$search}%");
+          ->orWhere('uid', 'like', "%{$search}%");
       });
     }
 
@@ -134,6 +134,9 @@ class SheepController extends Controller
   public function destroy(Sheep $sheep)
   {
     // Implementation for deleting a sheep
+    $sheep->delete();
+    return redirect()->route('dashboard.sheep.index')
+      ->with('success', 'Domba berhasil dihapus dari sistem.');
   }
 
   /**
@@ -143,11 +146,12 @@ class SheepController extends Controller
   {
     $sheep = null;
     $searchPerformed = false;
+    $uid = Cache::get('rfid_uid');
 
-    if ($request->filled('rfid')) {
+    if ($request->filled('uid')) {
       $searchPerformed = true;
-      $rfid = $request->input('rfid');
-      $sheep = Sheep::where('rfid', $rfid)->first();
+      $uid = $request->input('uid');
+      $sheep = Sheep::where('uid', $uid)->first();
     }
 
     return view('dashboard.sheep.search', compact('sheep', 'searchPerformed'));

@@ -61,7 +61,7 @@
             <!-- RFID -->
             <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
               <p class="text-sm text-gray-500 mb-1">Tag RFID</p>
-              <p class="font-medium text-gray-800">{{ $sheep->rfid }}</p>
+              <p class="font-medium text-gray-800">{{ $sheep->uid }}</p>
             </div>
 
             <!-- Name -->
@@ -124,17 +124,17 @@
             <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
               <p class="text-sm text-gray-500 mb-1">Status Kesehatan</p>
               <p class="font-medium">
-                @if ($sheep->health_status == 'healthy')
+                @if ($sheep->health_status == 'Sehat')
                   <span
                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                     Sehat
                   </span>
-                @elseif($sheep->health_status == 'sick')
+                @elseif($sheep->health_status == 'Sakit')
                   <span
                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
                     Sakit
                   </span>
-                @elseif($sheep->health_status == 'recovering')
+                @elseif($sheep->health_status == 'Karantina')
                   <span
                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                     Pemulihan
@@ -163,7 +163,7 @@
         </div>
 
         <!-- Parentage Information -->
-        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        {{-- <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 class="text-lg font-semibold text-gray-800 mb-4">Informasi Genetik</h2>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -191,7 +191,7 @@
               </p>
             </div>
           </div>
-        </div>
+        </div> --}}
 
         <!-- Health Records -->
         <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
@@ -241,7 +241,7 @@
       <!-- Right Column - Photo and Timestamps -->
       <div class="space-y-6">
         <!-- Photo Card -->
-        <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
+        {{-- <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 class="text-lg font-semibold text-gray-800 mb-4">Foto</h2>
 
           <div class="w-64 h-64 mx-auto bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
@@ -264,17 +264,14 @@
               @endif
             @endif
           </div>
-        </div>
+        </div> --}}
 
         <!-- System Information Card -->
         <div class="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <h2 class="text-lg font-semibold text-gray-800 mb-4">Informasi Sistem</h2>
 
           <div class="space-y-3">
-            <div>
-              <p class="text-sm text-gray-500 mb-1">ID Sistem</p>
-              <p class="font-medium text-gray-800">{{ $sheep->id }}</p>
-            </div>
+           
             <div>
               <p class="text-sm text-gray-500 mb-1">Terdaftar Pada</p>
               <p class="font-medium text-gray-800">{{ $sheep->created_at->format('d M Y H:i') }}</p>
