@@ -30,8 +30,8 @@ Route::prefix('dashboard')->name('dashboard')->group(function () {
         Route::post('/', [SheepController::class, 'store'])->name('.store');
         Route::get('/search', [SheepController::class, 'search'])->name('.search');
         Route::get('/{sheep}', [SheepController::class, 'show'])->name('.show');
-        Route::get('/{sheep}/edit', [SheepController::class, 'edit'])->name('.edit');
-        Route::put('/{sheep}', [SheepController::class, 'update'])->name('.update');
+        Route::get('/edit/{id}', [SheepController::class, 'edit'])->name('.edit');
+        Route::put('{sheep}', [SheepController::class, 'update'])->name('.update');
         Route::delete('/{sheep}', [SheepController::class, 'destroy'])->name('.destroy');
     });
 
@@ -39,6 +39,8 @@ Route::prefix('dashboard')->name('dashboard')->group(function () {
         return view('dashboard.pens');
     })->name('.pens.index');
 });
+
+
 
 // Temporary Sheep Routes
 

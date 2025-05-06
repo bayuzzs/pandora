@@ -115,17 +115,36 @@ class SheepController extends Controller
   /**
    * Show the form for editing the specified sheep.
    */
-  public function edit(Sheep $sheep)
+  public function edit($id)
   {
-    return view('dashboard.sheep.edit', compact('sheep'));
+    $sheep = Sheep::findOrFail($id); 
+    return view('dashboard.sheep.update', compact('sheep'));
+
   }
 
   /**
    * Update the specified sheep in storage.
    */
-  public function update(Request $request, Sheep $sheep)
+  public function update(Request $request, $id)
   {
-    // Implementation for updating a sheep
+        $sheep = Sheep::findOrFail($id);
+
+        $validated = $request->validate([
+            'uid' => 'required|string|max:255|unique:sheep,uid,' . $id,
+            'name' => 'required|string|max:255',
+            'gender' => 'required|in:male,female',
+            'birth_date' => 'required|date',
+            'breed' => 'required|string',
+            'weight' => 'required|numeric|min:0',
+            'health_status' => 'required|in:Sehat,Sakit,Pemulihan,Karantina',
+            'pen_id' => 'nullable|exists:pens,id',
+            'last_check_date' => 'nullable|date',
+            'last_vaccination_date' => 'nullable|date',
+        ]);
+
+        $sheep->update($validated);
+
+        return redirect()->route('dashboard.sheep.index')->with('success', 'Data domba berhasil diperbarui.');
   }
 
   /**

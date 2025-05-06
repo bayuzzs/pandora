@@ -60,9 +60,9 @@
         <!-- Manual Input Option -->
         <div class="w-full max-w-md">
           <div class="flex items-center">
-            <div class="flex-grow border-t border-gray-300"></div>
-            <span class="flex-shrink px-3 text-sm text-gray-500">atau masukkan RFID manual</span>
-            <div class="flex-grow border-t border-gray-300"></div>
+            {{-- <div class="flex-grow border-t border-gray-300"></div> --}}
+            {{-- <span class="flex-shrink px-3 text-sm text-gray-500">atau masukkan RFID manual</span> --}}
+            {{-- <div class="flex-grow border-t border-gray-300"></div> --}}
           </div>
 
           <form action="{{ route('dashboard.sheep.search') }}" method="GET" class="mt-4 flex">
@@ -127,7 +127,7 @@
         <div class="flex items-center justify-between mb-4">
           <h2 class="text-lg font-semibold text-gray-800">Detail Domba Ditemukan</h2>
           <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-            ID: {{ $sheep->uid }}
+            TAG UID: {{ $sheep->uid }}
           </span>
         </div>
 
@@ -258,7 +258,7 @@
 
             <!-- Action Buttons -->
             <div class="mt-6 flex flex-wrap gap-4">
-              <a href="{{ route('dashboard.sheep.edit', $sheep) }}"
+              <a href="{{ route('dashboard.sheep.edit', ['uid' => $sheep->uid]) }}"
                 class="inline-flex items-center px-4 py-2 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
