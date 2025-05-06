@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sheep;
 use App\Models\Pen;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class SheepController extends Controller
 {
@@ -59,6 +60,8 @@ class SheepController extends Controller
    */
   public function create()
   {
+      // Pastikan UID ada di cache
+      $uid = Cache::get('rfid_uid');
     return view('dashboard.sheep.create');
   }
 
@@ -67,32 +70,33 @@ class SheepController extends Controller
    */
   public function store(Request $request)
   {
+
+     // Pastikan UID ada di cache
+     $uid = Cache::get('rfid_uid');
+
     // Validate the request data
     $validated = $request->validate([
-      'rfid' => 'required|string|unique:sheep,rfid',
+     'uid' => 'required|string|max:255|unique:sheep,uid',
       'name' => 'required|string|max:255',
       'gender' => 'required|in:male,female',
       'birth_date' => 'required|date',
       'breed' => 'required|string',
       'weight' => 'required|numeric|min:0',
-      'health_status' => 'required|in:healthy,sick,recovering,quarantined',
+      'health_status' => 'required|in:Sehat,Sakit,Pemulihan,Karantina',
       'pen_id' => 'nullable|exists:pens,id',
-      'parent_sire' => 'nullable|string',
-      'parent_dam' => 'nullable|string',
-      'notes' => 'nullable|string',
+     
       'last_check_date' => 'nullable|date',
       'last_vaccination_date' => 'nullable|date',
-      'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     ]);
 
     // Create the sheep record
     $sheep = new Sheep($validated);
 
-    // Handle photo upload if provided
-    if ($request->hasFile('photo')) {
-      $photoPath = $request->file('photo')->store('sheep-photos', 'public');
-      $sheep->photo_path = $photoPath;
-    }
+    // // Handle photo upload if provided
+    // if ($request->hasFile('photo')) {
+    //   $photoPath = $request->file('photo')->store('sheep-photos', 'public');
+    //   $sheep->photo_path = $photoPath;
+    // }
 
     $sheep->save();
 

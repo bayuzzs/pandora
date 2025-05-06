@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('sheep', function (Blueprint $table) {
-            $table->string('photo_path')->nullable()->after('notes');
+            // $table->string('photo_path')->nullable()->after('notes');
         });
     }
 

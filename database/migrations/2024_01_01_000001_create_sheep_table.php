@@ -12,7 +12,7 @@ return new class extends Migration {
   {
     Schema::create('sheep', function (Blueprint $table) {
       $table->id();
-      $table->string('rfid')->unique()->comment('Nomor tag RFID unik');
+      $table->string('uid')->unique()->comment('Nomor tag uid unik');
       $table->string('name');
       $table->enum('gender', ['male', 'female']);
       $table->date('birth_date');
@@ -20,9 +20,6 @@ return new class extends Migration {
       $table->decimal('weight', 6, 2)->comment('Berat dalam kg');
       $table->enum('health_status', ['Sehat', 'Sakit', 'Pemulihan', 'Karantina']);
       $table->foreignId('pen_id')->nullable()->constrained('pens')->nullOnDelete();
-      $table->string('parent_sire')->nullable()->comment('RFID Pejantan');
-      $table->string('parent_dam')->nullable()->comment('RFID Induk');
-      $table->text('notes')->nullable();
       $table->date('last_check_date')->nullable();
       $table->date('last_vaccination_date')->nullable();
       $table->timestamps();

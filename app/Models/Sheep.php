@@ -15,7 +15,7 @@ class Sheep extends Model
    * @var array<int, string>
    */
   protected $fillable = [
-    'rfid',
+    'uid',
     'name',
     'gender',
     'birth_date',
@@ -23,12 +23,8 @@ class Sheep extends Model
     'weight',
     'health_status',
     'pen_id',
-    'parent_sire',
-    'parent_dam',
-    'notes',
     'last_check_date',
-    'last_vaccination_date',
-    'photo_path',
+    'last_vaccination_date'
   ];
 
   /**

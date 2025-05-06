@@ -33,16 +33,16 @@ class ServerWithMqttSub extends Command
         $this->info("🔌 Menyambungkan ke broker MQTT dan menunggu pesan RFID...");
 
         // Setup MQTT client
-        $server = env("IP_BrokerServer"); // IP broker
-        $port = env('PortBroker'); // Port MQTT
+        $server = env("IP_BrokerServer"); 
+        $port = env('PortBroker'); 
         $clientId = env('ClientName'). uniqid();
         $topic = env('TopicSubs');
         $mqttClient = new MqttClient($server, $port, $clientId);
 
         // Menghubungkan ke MQTT Broker
         $settings = (new ConnectionSettings())
-            ->setKeepAliveInterval(60);  // Bisa diatur lebih sesuai kebutuhan
-        $mqttClient->connect($settings, true);  // Connect ke broker MQTT
+            ->setKeepAliveInterval(60);  
+        $mqttClient->connect($settings, true);  
 
         // Berlangganan ke topik 'rfid/uid'
         $mqttClient->subscribe($topic, function (string $topic, string $message) {

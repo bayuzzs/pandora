@@ -39,9 +39,9 @@
                     d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                 </svg>
               </div>
-              <input type="text" id="rfid" name="rfid"
+              <input type="text" id="uid" name="uid"
                 class="pl-10 w-full h-11 rounded-lg border-gray-300 bg-gray-50 shadow-sm focus:border-green-500 focus:ring-2 focus:ring-green-200 focus:ring-opacity-50 focus:bg-white transition-colors duration-200 @error('rfid') border-red-500 @enderror"
-                placeholder="Masukkan nomor tag RFID" value="{{ old('rfid') }}" required>
+                placeholder="Masukkan nomor tag RFID" value="{{ old('rfid') }}" required readonly>
               <button type="button" id="scan-rfid-btn"
                 class="absolute inset-y-0 right-0 flex items-center cursor-pointer px-4 text-green-600 hover:text-green-800 transition-colors duration-200">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -266,11 +266,11 @@
                 required>
                 <option value="" disabled {{ old('health_status') ? '' : 'selected' }}>Pilih status kesehatan
                 </option>
-                <option value="healthy" {{ old('health_status') == 'healthy' ? 'selected' : '' }}>Sehat</option>
-                <option value="sick" {{ old('health_status') == 'sick' ? 'selected' : '' }}>Sakit</option>
-                <option value="recovering" {{ old('health_status') == 'recovering' ? 'selected' : '' }}>Dalam Pemulihan
+                <option value="Sehat" {{ old('health_status') == 'Sehat' ? 'selected' : '' }}>Sehat</option>
+                <option value="Sakit" {{ old('health_status') == 'Sakit' ? 'selected' : '' }}>Sakit</option>
+                <option value="Pemulihan" {{ old('health_status') == 'Pemulihan' ? 'selected' : '' }}>Dalam Pemulihan
                 </option>
-                <option value="quarantined" {{ old('health_status') == 'quarantined' ? 'selected' : '' }}>Karantina
+                <option value="Karantina" {{ old('health_status') == 'Karantina' ? 'selected' : '' }}>Karantina
                 </option>
               </select>
             </div>
@@ -306,7 +306,7 @@
           </div>
 
           <!-- Parent Information - sire (father) -->
-          <div>
+          {{-- <div>
             <label for="parent_sire" class="block text-sm font-medium text-gray-700 mb-1">ID Pejantan (Ayah)</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -323,10 +323,10 @@
             @error('parent_sire')
               <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
             @enderror
-          </div>
+          </div> --}}
 
           <!-- Parent Information - dam (mother) -->
-          <div>
+          {{-- <div>
             <label for="parent_dam" class="block text-sm font-medium text-gray-700 mb-1">ID Induk (Ibu)</label>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -343,7 +343,7 @@
             @error('parent_dam')
               <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
             @enderror
-          </div>
+          </div> --}}
 
           <!-- Last Check Date -->
           <div>
@@ -389,7 +389,7 @@
         </div>
 
         <!-- Notes -->
-        <div class="mt-6">
+        {{-- <div class="mt-6">
           <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Catatan</label>
           <div class="relative">
             <textarea id="notes" name="notes" rows="3"
@@ -399,10 +399,10 @@
           @error('notes')
             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
           @enderror
-        </div>
+        </div> --}}
 
         <!-- Photo Upload -->
-        <div class="mt-6">
+        {{-- <div class="mt-6">
           <label for="photo" class="block text-sm font-medium text-gray-700 mb-1">Foto Domba</label>
           <div class="flex flex-col items-center">
             <div id="image-preview"
@@ -434,7 +434,7 @@
           @error('photo')
             <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
           @enderror
-        </div>
+        </div> --}}
 
         <!-- Form Actions -->
         <div class="mt-8 flex justify-end space-x-3">
@@ -451,7 +451,9 @@
     </div>
   </div>
 
-  @push('scripts')
+
+  {{-- Disable Javascript Button  --}}
+  {{-- @push('scripts')
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         // Image preview functionality
@@ -543,5 +545,19 @@
         });
       });
     </script>
+  @endpush --}}
+
+  {{-- Script Get RFID UID --}}
+  @push('scripts')
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+      setInterval(function () {
+          $.get('/check-uid', function (data) {
+              if (data.uid && $('#uid').val() === '') {
+                  $('#uid').val(data.uid);
+              }
+          });
+      }, 2000); // Cek setiap 2 detik
+  </script>
   @endpush
 @endsection
