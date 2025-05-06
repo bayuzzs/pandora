@@ -55,3 +55,15 @@ Route::get('register', [RegisterController::class, 'showRegistrationForm'])->nam
 // Route::middleware('auth')->group(function () {
 //     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 // });
+
+
+
+// Route RFID Check
+Route::get('/check-uid', function () {
+    return response()->json([
+        'uid' => Cache::get('rfid_uid')
+    ]);
+});
+Route::get('/rfid/uid-latest', function () {
+    return response()->json(['uid' => Cache::get('rfid_uid')]);
+});
