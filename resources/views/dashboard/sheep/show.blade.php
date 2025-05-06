@@ -23,7 +23,7 @@
           <p class="text-gray-600">Detail informasi lengkap tentang domba.</p>
         </div>
         <div class="mt-4 md:mt-0 flex space-x-3">
-          <a href="{{ route('dashboard.sheep.edit', ['uid' => $sheep->uid]) }}"
+           <a href="{{ route('dashboard.sheep.edit', $sheep) }}"
             class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 focus:bg-yellow-600 active:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 transition ease-in-out duration-150">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
