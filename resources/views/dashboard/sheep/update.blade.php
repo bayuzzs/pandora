@@ -17,8 +17,8 @@
 
     <!-- Page Header -->
     <div class="bg-white rounded-xl shadow-sm p-6 mb-6 border border-gray-100">
-      <h1 class="text-2xl font-bold text-gray-800 mb-2">Tambah Domba Baru</h1>
-      <p class="text-gray-600">Isi formulir berikut untuk mendaftarkan domba baru ke dalam sistem.</p>
+      <h1 class="text-2xl font-bold text-gray-800 mb-2">Perbarui Domba Baru</h1>
+      <p class="text-gray-600">Isi formulir berikut untuk Memperbaruid data domba ke dalam sistem.</p>
     </div>
 
     <!-- Form Card -->
@@ -440,7 +440,7 @@
           </a>
           <button type="submit"
             class="px-5 py-3 bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors duration-200">
-            Simpan Data Domba
+            Perbarui Data Domba
           </button>
         </div>
       </form>
