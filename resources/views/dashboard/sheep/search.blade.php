@@ -188,18 +188,18 @@
                     <span class="text-gray-600">Status Kesehatan:</span>
                     <span
                       class="font-medium 
-                      {{ $sheep->health_status == 'healthy'
+                      {{ $sheep->health_status == 'Sehat'
                           ? 'text-green-600'
-                          : ($sheep->health_status == 'sick'
+                          : ($sheep->health_status == 'Sakit'
                               ? 'text-red-600'
-                              : ($sheep->health_status == 'recovering'
+                              : ($sheep->health_status == 'Pemulihan'
                                   ? 'text-yellow-600'
                                   : 'text-gray-600')) }}">
-                      {{ $sheep->health_status == 'healthy'
+                      {{ $sheep->health_status == 'Sehat'
                           ? 'Sehat'
-                          : ($sheep->health_status == 'sick'
+                          : ($sheep->health_status == 'Sakit'
                               ? 'Sakit'
-                              : ($sheep->health_status == 'recovering'
+                              : ($sheep->health_status == 'Pemulihan'
                                   ? 'Pemulihan'
                                   : 'Karantina')) }}
                     </span>
