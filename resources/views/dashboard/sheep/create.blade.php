@@ -451,104 +451,51 @@
     </div>
   </div>
 
-
-  {{-- Disable Javascript Button  --}}
-  {{-- @push('scripts')
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Image preview functionality
-        const photoInput = document.getElementById('photo');
-        const imagePreview = document.getElementById('image-preview');
-        const previewImage = document.getElementById('preview-image');
-        const removeButton = document.getElementById('remove-image');
-
-        photoInput.addEventListener('change', function(e) {
-          if (this.files && this.files[0]) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-              previewImage.src = e.target.result;
-              imagePreview.classList.remove('hidden');
-              removeButton.classList.remove('hidden');
-            }
-
-            reader.readAsDataURL(this.files[0]);
-          }
-        });
-
-        removeButton.addEventListener('click', function() {
-          photoInput.value = '';
-          imagePreview.classList.add('hidden');
-          removeButton.classList.add('hidden');
-          previewImage.src = '#';
-        });
-
-        // RFID Scanner Modal functionality
-        const scanRfidBtn = document.getElementById('scan-rfid-btn');
-        const rfidModal = document.getElementById('rfid-scanner-modal');
-        const closeModalBtn = document.getElementById('close-scanner-btn');
-        const simulateScanBtn = document.getElementById('simulate-scan-btn');
-        const rfidStatus = document.getElementById('rfid-status');
-        const rfidInput = document.getElementById('rfid');
-
-        // Open modal
-        scanRfidBtn.addEventListener('click', function() {
-          rfidModal.classList.remove('hidden');
-          rfidStatus.textContent = 'Siap memindai...';
-        });
-
-        // Close modal
-        closeModalBtn.addEventListener('click', function() {
-          rfidModal.classList.add('hidden');
-        });
-
-        // Simulate RFID scan
-        simulateScanBtn.addEventListener('click', function() {
-          // Disable button during "scanning"
-          simulateScanBtn.disabled = true;
-          simulateScanBtn.classList.add('bg-gray-400');
-          simulateScanBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
-
-          // Update status
-          rfidStatus.textContent = 'Memindai...';
-
-          // Simulate processing time
-          setTimeout(function() {
-            // Generate a random RFID number
-            const randomRFID = 'RFID' + Math.floor(1000000 + Math.random() * 9000000);
-
-            // Update status with scanned RFID
-            rfidStatus.textContent = 'ID Terdeteksi: ' + randomRFID;
-            rfidStatus.classList.add('text-green-600');
-
-            // Populate the RFID input field
-            rfidInput.value = randomRFID;
-
-            // Close modal after a short delay
-            setTimeout(function() {
+  @push('scripts')
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          const scanRfidBtn = document.getElementById('scan-rfid-btn');
+          const rfidModal = document.getElementById('rfid-scanner-modal');
+          const closeModalBtn = document.getElementById('close-scanner-btn');
+          const rfidStatus = document.getElementById('rfid-status');
+          const rfidInput = document.getElementById('uid');
+  
+          // Open modal
+          scanRfidBtn.addEventListener('click', function () {
+              rfidModal.classList.remove('hidden');
+              rfidStatus.textContent = 'Menunggu pembacaan tag RFID...';
+          });
+  
+          // Close modal
+          closeModalBtn.addEventListener('click', function () {
               rfidModal.classList.add('hidden');
-
-              // Reset button and status for next use
-              simulateScanBtn.disabled = false;
-              simulateScanBtn.classList.remove('bg-gray-400');
-              simulateScanBtn.classList.add('bg-green-600', 'hover:bg-green-700');
-              rfidStatus.classList.remove('text-green-600');
-            }, 1500);
-          }, 2000);
-        });
-
-        // Close modal if clicking outside
-        window.addEventListener('click', function(event) {
-          if (event.target === rfidModal) {
-            rfidModal.classList.add('hidden');
-          }
-        });
+          });
+  
+          // Poll for RFID UID
+          const interval = setInterval(function () {
+              $.get('/check-uid', function (data) {
+                  if (data.uid && rfidInput.value === '') {
+                      rfidInput.value = data.uid;
+                      rfidStatus.textContent = 'ID Terdeteksi: ' + data.uid;
+                      rfidStatus.classList.add('text-green-600');
+  
+                      // Close modal after a short delay
+                      setTimeout(function () {
+                          rfidModal.classList.add('hidden');
+                      }, 1000);
+  
+                      // Stop polling
+                      clearInterval(interval);
+                  }
+              });
+          }, 2000); // Check every 2 seconds
       });
-    </script>
-  @endpush --}}
+  </script>
+  @endpush
 
   {{-- Script Get RFID UID --}}
-  @push('scripts')
+  {{-- @push('scripts')
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
       setInterval(function () {
@@ -559,5 +506,5 @@
           });
       }, 2000); // Cek setiap 2 detik
   </script>
-  @endpush
+  @endpush --}}
 @endsection

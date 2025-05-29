@@ -100,6 +100,8 @@ class SheepController extends Controller
 
     $sheep->save();
 
+    Cache::forget('rfid_uid');
+
     return redirect()->route('dashboard.sheep.index')
       ->with('success', 'Domba berhasil ditambahkan ke dalam sistem.');
   }

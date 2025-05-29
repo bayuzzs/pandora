@@ -2,172 +2,35 @@
 
 namespace Database\Seeders;
 
-use App\Models\Sheep;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
+use DB;
 
 class SheepSeeder extends Seeder
 {
-  /**
-   * Run the database seeds.
-   */
-  public function run(): void
-  {
-    $sheep = [
-      [
-        'rfid' => 'RF-2023-0001',
-        'name' => 'Domba Garut A12',
-        'gender' => 'male',
-        'birth_date' => Carbon::parse('2022-03-12'),
-        'breed' => 'garut',
-        'weight' => 65.5,
-        'health_status' => 'Sehat',
-        'pen_id' => 1,
-        'parent_sire' => 'RF-2020-0012',
-        'parent_dam' => 'RF-2020-0025',
-        'notes' => 'Domba sehat dengan kondisi bagus',
-        'last_check_date' => Carbon::now()->subDays(15),
-        'last_vaccination_date' => Carbon::now()->subMonths(1),
-      ],
-      [
-        'rfid' => 'RF-2023-0002',
-        'name' => 'Merino B23',
-        'gender' => 'female',
-        'birth_date' => Carbon::parse('2022-05-20'),
-        'breed' => 'merino',
-        'weight' => 48.7,
-        'health_status' => 'Sehat',
-        'pen_id' => 2,
-        'parent_sire' => 'RF-2021-0005',
-        'parent_dam' => 'RF-2020-0040',
-        'notes' => 'Domba betina dengan bulu yang bagus',
-        'last_check_date' => Carbon::now()->subDays(10),
-        'last_vaccination_date' => Carbon::now()->subMonths(2),
-      ],
-      [
-        'rfid' => 'RF-2023-0003',
-        'name' => 'Suffolk C04',
-        'gender' => 'male',
-        'birth_date' => Carbon::parse('2021-11-05'),
-        'breed' => 'suffolk',
-        'weight' => 72.3,
-        'health_status' => 'Pemulihan',
-        'pen_id' => 4,
-        'parent_sire' => 'RF-2020-0022',
-        'parent_dam' => 'RF-2019-0018',
-        'notes' => 'Domba dalam proses pemulihan dari demam',
-        'last_check_date' => Carbon::now()->subDays(3),
-        'last_vaccination_date' => Carbon::now()->subMonths(3),
-      ],
-      [
-        'rfid' => 'RF-2023-0004',
-        'name' => 'Domba Ekor Gemuk D15',
-        'gender' => 'female',
-        'birth_date' => Carbon::parse('2022-02-10'),
-        'breed' => 'ekor_gemuk',
-        'weight' => 53.1,
-        'health_status' => 'Sehat',
-        'pen_id' => 2,
-        'parent_sire' => 'RF-2021-0030',
-        'parent_dam' => 'RF-2020-0055',
-        'notes' => 'Domba betina produktif',
-        'last_check_date' => Carbon::now()->subDays(20),
-        'last_vaccination_date' => Carbon::now()->subMonths(1),
-      ],
-      [
-        'rfid' => 'RF-2023-0005',
-        'name' => 'Domba Batur E07',
-        'gender' => 'male',
-        'birth_date' => Carbon::parse('2023-01-15'),
-        'breed' => 'batur',
-        'weight' => 42.8,
-        'health_status' => 'Sehat',
-        'pen_id' => 3,
-        'parent_sire' => 'RF-2022-0010',
-        'parent_dam' => 'RF-2021-0032',
-        'notes' => 'Domba anakan dengan pertumbuhan baik',
-        'last_check_date' => Carbon::now()->subDays(7),
-        'last_vaccination_date' => Carbon::now()->subMonths(1),
-      ],
-      [
-        'rfid' => 'RF-2023-0006',
-        'name' => 'Dorper F18',
-        'gender' => 'female',
-        'birth_date' => Carbon::parse('2021-08-22'),
-        'breed' => 'dorper',
-        'weight' => 57.4,
-        'health_status' => 'Sakit',
-        'pen_id' => 4,
-        'parent_sire' => 'RF-2020-0018',
-        'parent_dam' => 'RF-2019-0042',
-        'notes' => 'Domba betina sedang sakit pernapasan',
-        'last_check_date' => Carbon::now()->subDays(1),
-        'last_vaccination_date' => Carbon::now()->subMonths(4),
-      ],
-      [
-        'rfid' => 'RF-2023-0007',
-        'name' => 'Texel G09',
-        'gender' => 'male',
-        'birth_date' => Carbon::parse('2022-07-05'),
-        'breed' => 'texel',
-        'weight' => 61.2,
-        'health_status' => 'Sehat',
-        'pen_id' => 1,
-        'parent_sire' => 'RF-2021-0015',
-        'parent_dam' => 'RF-2020-0060',
-        'notes' => 'Domba jantan dengan postur tegap',
-        'last_check_date' => Carbon::now()->subDays(12),
-        'last_vaccination_date' => Carbon::now()->subMonths(2),
-      ],
-      [
-        'rfid' => 'RF-2023-0008',
-        'name' => 'Domba Garut H22',
-        'gender' => 'male',
-        'birth_date' => Carbon::parse('2023-02-18'),
-        'breed' => 'garut',
-        'weight' => 38.5,
-        'health_status' => 'Sehat',
-        'pen_id' => 3,
-        'parent_sire' => 'RF-2022-0008',
-        'parent_dam' => 'RF-2021-0025',
-        'notes' => 'Domba anakan jenis Garut',
-        'last_check_date' => Carbon::now()->subDays(5),
-        'last_vaccination_date' => Carbon::now()->subWeeks(3),
-      ],
-      [
-        'rfid' => 'RF-2023-0009',
-        'name' => 'Merino I14',
-        'gender' => 'female',
-        'birth_date' => Carbon::parse('2021-10-12'),
-        'breed' => 'merino',
-        'weight' => 51.7,
-        'health_status' => 'Karantina',
-        'pen_id' => 4,
-        'parent_sire' => 'RF-2020-0025',
-        'parent_dam' => 'RF-2020-0030',
-        'notes' => 'Domba dalam karantina untuk pengamatan',
-        'last_check_date' => Carbon::now()->subDays(2),
-        'last_vaccination_date' => Carbon::now()->subMonths(3),
-      ],
-      [
-        'rfid' => 'RF-2023-0010',
-        'name' => 'Domba Ekor Gemuk J11',
-        'gender' => 'female',
-        'birth_date' => Carbon::parse('2022-04-25'),
-        'breed' => 'ekor_gemuk',
-        'weight' => 49.3,
-        'health_status' => 'Sehat',
-        'pen_id' => 2,
-        'parent_sire' => 'RF-2021-0022',
-        'parent_dam' => 'RF-2020-0048',
-        'notes' => 'Domba betina dengan ekor besar',
-        'last_check_date' => Carbon::now()->subDays(18),
-        'last_vaccination_date' => Carbon::now()->subMonths(1),
-      ],
-    ];
+    public function run(): void
+    {
+        $sheepData = [];
 
-    foreach ($sheep as $animal) {
-      Sheep::create($animal);
+        for ($i = 0; $i < 100; $i++) {
+            $sheepData[] = [
+                'uid' => Str::uuid(),
+                'name' => 'Domba ' . ($i + 1),
+                'gender' => rand(0, 1) ? 'male' : 'female',
+                'birth_date' => Carbon::now()->subYears(rand(1, 5))->toDateString(),
+                'breed' => ['Dorper', 'Garut', 'Etawa'][array_rand(['Dorper', 'Garut', 'Etawa'])],
+                'weight' => rand(30, 80) + rand(0, 99) / 100, // Berat dalam kg
+                'health_status' => ['Sehat', 'Sakit', 'Pemulihan', 'Karantina'][array_rand(['Sehat', 'Sakit', 'Pemulihan', 'Karantina'])],
+                'pen_id' => rand(1, max: 4), // Anggap ada 10 kandang
+                'last_check_date' => Carbon::now()->subDays(rand(1, 30))->toDateString(),
+                'last_vaccination_date' => Carbon::now()->subDays(rand(1, 365))->toDateString(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ];
+        }
+
+        // Insert data ke database
+        DB::table('sheep')->insert($sheepData);
     }
-  }
 }

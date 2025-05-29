@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             PenSeeder::class,
-            // SheepSeeder::class,
+            SheepSeeder::class,
         ]);
     }
 }
