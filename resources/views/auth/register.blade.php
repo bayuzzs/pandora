@@ -32,28 +32,41 @@
             <div>
               <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
               <input id="name" name="name" type="text" required
-                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm"
-                placeholder="Masukkan nama lengkap">
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm @error('name') border-red-500 @enderror"
+                placeholder="Masukkan nama lengkap" value="{{ old('name') }}">
+              @error('name')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
             </div>
             <div>
               <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Alamat Email</label>
               <input id="email" name="email" type="email" required
-                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm"
-                placeholder="Masukkan alamat email">
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm @error('email') border-red-500 @enderror"
+                placeholder="Masukkan alamat email" value="{{ old('email') }}">
+              @error('email')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
             </div>
             <div>
               <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Kata
                 Sandi</label>
               <input id="password" name="password" type="password" required
-                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm"
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm @error('password') border-red-500 @enderror"
                 placeholder="Masukkan kata sandi">
+              @error('password')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
             </div>
             <div>
-              <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi Kata
+              <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Konfirmasi
+                Kata
                 Sandi</label>
               <input id="password_confirmation" name="password_confirmation" type="password" required
-                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm"
+                class="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008a3e] focus:border-[#008a3e] transition duration-150 ease-in-out sm:text-sm @error('password_confirmation') border-red-500 @enderror"
                 placeholder="Masukkan ulang kata sandi">
+              @error('password_confirmation')
+                <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+              @enderror
             </div>
           </div>
 

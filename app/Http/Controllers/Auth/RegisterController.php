@@ -26,8 +26,14 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'name.required' => 'Nama harus diisi',
+            'email.required' => 'Email harus diisi',
+            'password.required' => 'Kata Sandi harus diisi',
+            'password.confirmed' => 'Kata Sandi tidak sama',
+            'password.min' => 'Kata Sandi Minimal 8 Karakter',
+            'email.unique' => 'Email sudah terdaftar',
         ]);
-
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
