@@ -54,7 +54,7 @@
         </div>
 
         <!-- This will be the actual video element, initially hidden -->
-        <img id="video-stream" class="absolute inset-0 w-full h-full object-cover hidden" src="http://10.10.1.99:5000/video_feed"></img>
+        <img id="video-stream" class="absolute inset-0 w-full h-full object-cover hidden" src="http://127.0.0.1:5000/video_feed"></img>
       </div>
 
       <!-- Video Controls -->

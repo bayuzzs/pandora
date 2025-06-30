@@ -7,6 +7,7 @@
   <title>@yield('title', config('app.name'))</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   @stack('styles')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-gray-50">
@@ -105,6 +106,38 @@
         });
       }
     });
+document.addEventListener('DOMContentLoaded', function () {
+
+    @if(session('success'))
+    Swal.fire({
+        toast: true,
+        icon: 'success',
+        title: "{{ session('success') }}",
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true
+    });
+    @endif
+
+    @if($errors->any())
+    // Cek error khusus UID unik
+    @if($errors->has('uid'))
+    Swal.fire({
+        toast: true,
+        icon: 'error',
+        title: "{{ $errors->first('uid') }}",
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true
+    });
+    @endif
+    @endif
+
+});
+
+
   </script>
 </body>
 

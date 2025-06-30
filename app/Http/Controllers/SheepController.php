@@ -75,20 +75,37 @@ class SheepController extends Controller
      $uid = Cache::get('rfid_uid');
 
     // Validate the request data
-    $validated = $request->validate([
-     'uid' => 'required|string|max:255|unique:sheep,uid',
-      'name' => 'required|string|max:255',
-      'gender' => 'required|in:male,female',
-      'birth_date' => 'required|date',
-      'breed' => 'required|string',
-      'weight' => 'required|numeric|min:0',
-      'health_status' => 'required|in:Sehat,Sakit,Pemulihan,Karantina',
-      'pen_id' => 'nullable|exists:pens,id',
-     
-      'last_check_date' => 'nullable|date',
-      'last_vaccination_date' => 'nullable|date',
-    ]);
-
+$validated = $request->validate([
+    'uid' => 'required|string|max:255|unique:sheep,uid',
+    'name' => 'required|string|max:255',
+    'gender' => 'required|in:male,female',
+    'birth_date' => 'required|date',
+    'breed' => 'required|string',
+    'weight' => 'required|numeric|min:0',
+    'health_status' => 'required|in:Sehat,Sakit,Pemulihan,Karantina',
+    'pen_id' => 'nullable|exists:pens,id',
+    'last_check_date' => 'nullable|date',
+    'last_vaccination_date' => 'nullable|date',
+], [
+    'uid.required' => 'UID wajib diisi.',
+    'uid.string' => 'UID harus berupa teks.',
+    'uid.max' => 'UID maksimal 255 karakter.',
+    'uid.unique' => 'Tag sudah pernah digunakan.',
+    'name.required' => 'Nama wajib diisi.',
+    'gender.required' => 'Jenis kelamin wajib dipilih.',
+    'gender.in' => 'Jenis kelamin harus laki-laki (male) atau perempuan (female).',
+    'birth_date.required' => 'Tanggal lahir wajib diisi.',
+    'birth_date.date' => 'Tanggal lahir harus berupa tanggal yang valid.',
+    'breed.required' => 'Ras wajib diisi.',
+    'weight.required' => 'Berat wajib diisi.',
+    'weight.numeric' => 'Berat harus berupa angka.',
+    'weight.min' => 'Berat minimal adalah 0.',
+    'health_status.required' => 'Status kesehatan wajib dipilih.',
+    'health_status.in' => 'Status kesehatan harus salah satu dari: Sehat, Sakit, Pemulihan, Karantina.',
+    'pen_id.exists' => 'Kandang tidak valid.',
+    'last_check_date.date' => 'Tanggal cek terakhir harus berupa tanggal yang valid.',
+    'last_vaccination_date.date' => 'Tanggal vaksinasi terakhir harus berupa tanggal yang valid.',
+]);
     // Create the sheep record
     $sheep = new Sheep($validated);
 
