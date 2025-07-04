@@ -18,14 +18,17 @@
 
 ## 📦 Instalasi Proyek
 
-### 1. Clone Repositori
+### 1. Persiapan instalasi 
+Proyek ini disarankan menggunakan Php version 8.11 keatas dan Mysql untuk database 
+
+### 2. Salin Source Code 
 
 ```bash
 git clone https://github.com/bayuzzs/pandora.git
 cd pandora
 ```
 
-### 2. Instalasi Laravel
+### 3. Instalasi Laravel
 
 ```bash
 composer install
@@ -33,7 +36,7 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-### 3. Setup Database
+### 4. Setup Database
 
 ```bash
 php artisan migrate --seed
