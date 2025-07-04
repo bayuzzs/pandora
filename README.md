@@ -11,7 +11,8 @@
 
 - ✅ CRUD data domba (nama, UID RFID, jenis kelamin, ras, bobot, status kesehatan)
 - 📅 Catat kelahiran, bobot, dan riwayat kesehatan
-- 📸 **AI Deteksi Visual**: perhintungan jumlah domba di kandang dengan detection object
+- 📸 **AI Deteksi Visual**: perhitungan jumlah domba di kandang dengan object detection
+- 📡 **Integrasi MQTT**: untuk menerima data dari perangkat IoT seperti pembaca RFID
 
 ---
 
@@ -43,6 +44,39 @@ Edit `.env` sesuai konfigurasi database kamu.
 
 ---
 
+### 📦 Instalasi Frontend
+
+Bagian ini hanya untuk antarmuka frontend berbasis Vite (Blade + Tailwind).
+
+- Instalasi dependensi frontend:
+  ```bash
+  npm install
+  ```
+
+- Jalankan server pengembangan:
+  ```bash
+  npm run dev
+  ```
+
+- Build untuk produksi:
+  ```bash
+  npm run build
+  ```
+
+---
+
+## ⚙️ Menjalankan Laravel dengan MQTT
+
+Pandora menggunakan MQTT untuk komunikasi dengan perangkat seperti RFID reader. Untuk itu, Laravel dijalankan menggunakan perintah khusus berikut:
+
+```bash
+php artisan serve-mqtt
+```
+
+> Perintah ini akan menjalankan Laravel bersama subscriber MQTT untuk mendengarkan dan memproses data dari broker MQTT secara real-time.
+
+---
+
 ## 🧠 Instalasi AI Python – Deteksi Kambing
 
 ### 1. Siapkan Environment Python
@@ -65,13 +99,7 @@ pip install -r requirements.txt
 python detect.py --source 0 --weights best.pt --name kambing_detect
 ```
 
-
----
-
-
-
-
-
+> Gunakan kamera atau video untuk mendeteksi domba dan kambing secara otomatis.
 
 ---
 
@@ -80,4 +108,3 @@ python detect.py --source 0 --weights best.pt --name kambing_detect
 Pandora dikembangkan untuk meningkatkan efisiensi peternakan Rahayu dengan memadukan teknologi **web modern (Laravel)** dan **kecerdasan buatan (Python AI)**.
 
 ---
-
