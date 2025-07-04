@@ -77,29 +77,37 @@ php artisan serve-mqtt
 
 ---
 
-## 🧠 Instalasi AI Python – Deteksi Kambing
+## 🧠 Instalasi AI Python – Deteksi Domba
 
-### 1. Siapkan Environment Python
+### 1. Gunakan Python Versi 3.10
+
+Pastikan kamu menggunakan **Python 3.10.x** untuk kompatibilitas terbaik.
+
+### 2. Siapkan Environment dan Upgrade pip
 
 ```bash
 python -m venv venv
 source venv/bin/activate  # Linux/macOS
 venv\Scripts\activate   # Windows
+
+python -m pip install --upgrade pip
 ```
 
-### 2. Install Library Python
+### 3. Install Dependensi
 
 ```bash
 pip install -r requirements.txt
+pip install flask
+pip install opencv-python
 ```
 
-### 3. Jalankan Deteksi AI (YOLOv7 misalnya)
+### 4. Jalankan AI – Versi Minimal
 
 ```bash
-python detect.py --source 0 --weights best.pt --name kambing_detect
+python detect.py --weights best.pt --source image.jpg --conf 0.25 --name minimal
 ```
 
-> Gunakan kamera atau video untuk mendeteksi domba dan kambing secara otomatis.
+> Cocok untuk proses cepat pada gambar/video, dapat diintegrasikan ke backend secara otomatis.
 
 ---
 
