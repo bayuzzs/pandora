@@ -16,6 +16,69 @@
 
 ---
 
+
+🔧 Persiapan Perangkat
+
+Sebelum menggunakan perangkat, pastikan hal-hal berikut sudah terpenuhi:
+
+🔋 Baterai terpasang dengan benar pada perangkat.
+
+🔌 Baterai dalam kondisi penuh atau memiliki daya yang cukup.
+
+📶 Jaringan WiFi tersedia dan stabil.
+
+🌐 Perangkat dan website berada dalam satu jaringan.
+
+▶️ Langkah Menjalankan Perangkat
+
+Nyalakan perangkat IoT.
+
+Pastikan perangkat berhasil terhubung ke jaringan WiFi.
+
+Perangkat akan otomatis mencoba terhubung ke MQTT Server.
+
+Jika koneksi berhasil, data akan dikirim dan dapat diakses melalui website.
+
+❗ Troubleshooting (Jika Perangkat Tidak Terdeteksi / Gagal Scan)
+
+Jika perangkat tidak berhasil melakukan scan atau tidak terhubung dengan sistem, lakukan pengecekan berikut:
+
+✅ Pastikan MQTT Server sedang berjalan.
+
+✅ Pastikan seluruh perangkat berada dalam satu jaringan.
+
+✅ Periksa kembali alamat IP MQTT Server pada program (sketch).
+
+✅ Pastikan tidak ada kesalahan penulisan pada konfigurasi.
+
+⚙️ Konfigurasi pada Sketch
+
+Beberapa pengaturan yang dapat (dan wajib) disesuaikan pada file sketch antara lain:
+
+📡 Pengaturan WiFi
+
+SSID
+
+Password WiFi
+
+🖥️ Alamat MQTT Server
+
+IP Address Server
+
+Port MQTT (jika diperlukan)
+
+Contoh (ilustrasi):
+
+const char* ssid = "NAMA_WIFI";
+const char* password = "PASSWORD_WIFI";
+const char* mqtt_server = "192.168.1.10";
+
+📌 Catatan Tambahan
+
+Disarankan menggunakan jaringan lokal (LAN/WiFi yang sama) untuk menghindari masalah koneksi.
+
+Pastikan broker MQTT (Mosquitto/Aedes/Mosca) berjalan sebelum perangkat dinyalakan.
+
 ## 📦 Instalasi Proyek
 
 ### 1. Persiapan instalasi 
